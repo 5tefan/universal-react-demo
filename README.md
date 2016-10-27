@@ -23,11 +23,13 @@ Features:
 - Organized according to the ["huge-apps" react-router example](https://github.com/ReactTraining/react-router/tree/master/examples/huge-apps) 
 - server side rendering (aka. universal or isomorphic React)
 
-## Getting started
+## Up and running
+
+### Getting started
 
 Run `npm install` to install the dependencies listed in `package.json`.
 
-## Development view 
+### Development view 
 
 To start a server on `http://localhost:8000` serving the bundled application, 
 run `npm run dev`.
@@ -39,12 +41,12 @@ Note: `webpack-dev-server` does not watch the config file.
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
 
-## Build the Javascript Bundle
+### Build the client bundle
 
 Run `npm run client-build` to bundle all assets into a `build/` 
 dir. This step must be done before server side rendering is possible.
 
-## Server side rendering
+### Server side rendering bundle
 
 The file `server.js` implements server side rendering. It uses ES6+JSX syntax, so
 run `npm run server-build` to make Webpack bundle it into `./build/server.js`.
@@ -83,9 +85,11 @@ In the Webpack configuration file `webpack.client.config.js`, we specify
 }
 ```
 
-This tells Webpack to process assets ending in .scss using first [sass-loader](https://github.com/jtangelder/sass-loader)
-which converts scss to css, then [css-loader](https://github.com/webpack/css-loader) which does some namespacing and other
-stuff(read their README :), finally [style-loader](https://github.com/webpack/style-loader) "Adds CSS to the DOM by injecting a `<style>` tag".
+This tells Webpack to process assets ending in .scss using first
+1. [sass-loader](https://github.com/jtangelder/sass-loader) which converts scss to css, 
+2. [css-loader](https://github.com/webpack/css-loader) which does some namespacing and other stuff(read their README :),
+3. Finally [style-loader](https://github.com/webpack/style-loader) 
+> Adds CSS to the DOM by injecting a `<style>` tag
 
 The other loader, testing for jsx, is responsible for transpiling ES6 and [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html)
 to ES5 (native browser Javascript). 
@@ -97,6 +101,7 @@ We're using a couple of plugins for convenience.
 #### HtmlWebpackPlugin
 
 > The plugin will generate an HTML5 file for you that includes all your webpack bundles in the body using script tags.
+
 From [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin)
 
 #### FaviconsWebpackPlugin
@@ -108,16 +113,24 @@ of `index.html` file generated on build.
 ### Code splitting
 
 One traditional problem with Single Page Applications is that all the code had to be loaded at once
-when the user first visited, even if it wasn't all needed.
-
+on initial page load, even if it wasn't all needed.
 Webpack is able to split your code into "chunks" that can be loaded on demand after the initial page load,
 so that only the code for the current view is loaded. When the user navigates to another view, a new chunk is loaded.
 
 See [Webpack code splitting](https://webpack.github.io/docs/code-splitting.html) documentation.
 
-In this Demo, we use `System.import` for fetching react-router components, ensuring that each route
-can be loaded individually. 
 
-For example, see one of the route specifications [app/routes/About/index.js](app/routes/About/index.js).
+In this demo, see any route specification like [app/routes/About/index.js](app/routes/About/index.js)
+```
+module.exports = { 
+        path: 'about',
+        getComponent(nextState, cb) {
+                System.import('./components/About.jsx')
+                        .then((About) => cb(null, About));
+        }   
+}
+```
 
+In this Demo, we use `System.import` for fetching react-router components. This results in
+chunks for for our About page which are only fetched when the client visits `/about`.
 
