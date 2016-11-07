@@ -41,6 +41,12 @@ module.exports = {
 		}]
 	},
 	plugins: [
+		new webpack.DefinePlugin({
+            // http://stackoverflow.com/a/35372706/2177568
+            // for server side code, just require, don't chunk
+            // use `if (ONSERVER) { ...` for server specific code
+            ONSERVER: false
+        }),
 		new FaviconsWebpackPlugin({
 			logo: './app/images/favicon.png',
 			prefix: 'icons-[hash]/',
@@ -72,13 +78,13 @@ module.exports = {
 			filename: 'style.css',
 			allChunks: true
 		}),
-                new webpack.LoaderOptionsPlugin({
-                    options: {
-                        sassLoader: {
-                                includePaths: [path.resolve(__dirname, "./node_modules/compass-mixins/lib")]
-                        }
-                    }
-                })
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                sassLoader: {
+                    includePaths: [path.resolve(__dirname, "./node_modules/compass-mixins/lib")]
+                }
+            }
+        })
 	],
 	devServer: {
 		historyApiFallback: true,

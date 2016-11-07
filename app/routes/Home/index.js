@@ -1,7 +1,11 @@
 module.exports = {
 	path: 'home',
 	getComponent(nextState, cb) {
-		System.import('./components/Home.jsx')
-			.then((Home) => cb(null, Home));
+        if (ONSERVER) {
+            cb(null, require('./components/Home.jsx'));
+        } else {
+            System.import('./components/Home.jsx')
+                .then((Home) => cb(null, Home));
+        }
 	}
 }

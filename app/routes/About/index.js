@@ -1,7 +1,12 @@
 module.exports = {
 	path: 'about',
 	getComponent(nextState, cb) {
-		System.import('./components/About.jsx')
-			.then((About) => cb(null, About));
+        if (ONSERVER) {
+            // Don't code split w/ System.import for server side render
+            cb(null, requre('./components/About.jsx'));
+        } else {
+            System.import('./components/About.jsx')
+                .then((About) => cb(null, About));
+        }
 	}
 }
