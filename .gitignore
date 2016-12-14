@@ -38,3 +38,6 @@ jspm_packages
 
 # build dir
 build
+
+# editor tmp files
+*.swp
