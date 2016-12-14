@@ -14,7 +14,9 @@ import { renderToString } from 'react-dom/server';
 const app = new express()
 const server = new http.Server(app)
 
-const index = fs.readFileSync('build/index.html', 'utf8');
+const index = fs.readFileSync('build/index.html', 'utf8')
+
+const PORT = process.env.PORT || 8000
 
 // Serve static files
 app.use(express.static('build'))
@@ -47,5 +49,6 @@ app.use((req, res) => {
 })
 
 // Start the HTTP server
-server.listen(8000)
+server.listen(PORT)
+console.log("\nApplication available at http://localhost:" + PORT + "\n")
 
