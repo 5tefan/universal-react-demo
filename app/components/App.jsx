@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './App.scss';
-import { Link } from 'react-router/es6';
+import { Link } from 'react-router/es';
 
 module.exports = React.createClass({
 	render() {

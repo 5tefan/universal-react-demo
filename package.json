@@ -29,7 +29,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "compass-mixins": "^0.12.10",
     "concurrently": "^3.1.0",
-    "css-loader": "^0.25.0",
+    "css-loader": "^0.26.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "favicons-webpack-plugin": "0.0.7",
     "html-webpack-plugin": "^2.22.0",
@@ -45,6 +45,6 @@
     "express": "^4.14.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "react-router": "^2.8.0"
+    "react-router": "^3.0.0"
   }
 }

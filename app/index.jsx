@@ -1,6 +1,6 @@
 import { render } from 'react-dom';
 import React from 'react';
-import { Router, Link, useRouterHistory } from 'react-router/es6';
+import { Router, Link, useRouterHistory } from 'react-router/es';
 import { createHistory } from 'history';
 import routes from './das_routes.js';
 

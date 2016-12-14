@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router/es6';
+import { Link } from 'react-router/es';
 import styles from './SubviewNav.scss';
 
 class SubviewNav extends Component {
