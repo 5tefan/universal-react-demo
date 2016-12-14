@@ -25,14 +25,14 @@ module.exports = {
 		{
 			test: /\.jsx*$/,
 			exclude: /(node_modules|bower_components)/,
-			loaders: ["babel?presets[]=es2015&presets[]=stage-0&presets[]=react"]
+			loaders: ["babel-loader?presets[]=es2015&presets[]=stage-0&presets[]=react"]
 		}, {
 			test: /\.scss$/,
-			loader: 'css/locals?modules&loacalIdentName=[name]--[local]--[hash:base64:5]!sass'
+			loader: 'css-loader/locals?modules&loacalIdentName=[name]--[local]--[hash:base64:5]!sass-loader'
 		}, {
-                        test: /\.json$/,
-                        loader: 'json' 
-                }]
+            test: /\.json$/,
+            loader: 'json-loader' 
+        }]
 	},
 	plugins: [
 		new webpack.DefinePlugin({

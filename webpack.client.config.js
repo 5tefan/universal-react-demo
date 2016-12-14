@@ -34,10 +34,10 @@ module.exports = {
 		{
 			test: /\.jsx*$/,
 			exclude: /(node_modules|bower_components)/,
-			loader: 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0'
+			loader: 'babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-0'
 		}, {
 			test: /\.scss$/,
-			loader: 'style!css?modules&loacalIdentName=[name]--[local]--[hash:base64:5]!sass'
+			loader: 'style-loader!css-loader?modules&loacalIdentName=[name]--[local]--[hash:base64:5]!sass-loader'
 		}]
 	},
 	plugins: [
