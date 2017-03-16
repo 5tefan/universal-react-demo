@@ -1,13 +1,15 @@
-import { render } from 'react-dom';
 import React from 'react';
-import { Router, Link, useRouterHistory } from 'react-router/es';
-import { createHistory } from 'history';
-import routes from './das_routes.js';
+import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-const browserHistory = useRouterHistory(createHistory)({ basename: '/' });
+import App from '~/components/App.jsx';
 
-render(
-	<Router history={ browserHistory } routes={ routes }/>,
-	 document.getElementById('root')
-);
+const Index = () => (
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>
+)
+
+
+render(<Index/>, document.getElementById('root'));
 
