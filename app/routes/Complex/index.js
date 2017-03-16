@@ -11,6 +11,6 @@ import Bundle from '~/components/Bundle.jsx';
 // just send the path to Bundle and let the Bundle component do all.
 // More details, seems Webpack needs to be able to create the context
 // for the import, https://webpack.github.io/docs/context.html
-const About = () => (<Bundle load={ () => System.import('./components/About.jsx') }/>);
+const Complex = (props) => (<Bundle load={ () => System.import('./components/Complex.jsx') } pass={ props }/>);
 
-export default About;
+export default Complex;

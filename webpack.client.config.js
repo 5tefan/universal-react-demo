@@ -77,14 +77,7 @@ module.exports = {
 		new ExtractTextPlugin({
 			filename: 'style.css',
 			allChunks: true
-		}),
-        new webpack.LoaderOptionsPlugin({
-            options: {
-                sassLoader: {
-                    includePaths: [path.resolve(__dirname, "./node_modules/compass-mixins/lib")]
-                }
-            }
-        })
+		})
 	],
 	devServer: {
 		historyApiFallback: true,

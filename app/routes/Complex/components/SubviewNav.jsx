@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router/es';
+import { NavLink } from 'react-router-dom';
 import styles from './SubviewNav.scss';
 
-class SubviewNav extends Component {
-	render() {
-		return (
-			<div className={ styles.otherwise }>
-				<Link to="/complex/page1" activeClassName={ styles.active }>
-                                    Page1
-				</Link>
-				<Link to="/complex/page2" activeClassName={ styles.active }>
-                                    Page2
-				</Link>
-			</div>
-		)
-	}
-}
+const SubviewNav = ({ match }) => (
+    <div className={ styles.otherwise }>
+        <NavLink to={ match.url + "/page1" } activeClassName={ styles.active }>
+            Page1
+        </NavLink>
+        <NavLink to={ match.url + "/page2" } activeClassName={ styles.active }>
+            Page2
+        </NavLink>
+    </div>
+)
 
 module.exports = SubviewNav;
 				
