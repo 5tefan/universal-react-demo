@@ -11,7 +11,9 @@ import Bundle from '~/components/Bundle.jsx';
 // just send the path to Bundle and let the Bundle component do all.
 // More details, seems Webpack needs to be able to create the context
 // for the import, https://webpack.github.io/docs/context.html
-const Page1 = () => (<Bundle load={ () => System.import('./components/Page1.jsx') }/>);
-
-export default Page1;
+if (ONSERVER) {
+    module.exports = require('./components/Page1.jsx');
+} else {
+    module.exports= () => (<Bundle load={ () => System.import('./components/Page1.jsx') }/>);
+}
 

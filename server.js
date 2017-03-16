@@ -1,51 +1,45 @@
-// express.js
-import path from 'path'
+import { createServer } from 'http'
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import { StaticRouter } from 'react-router'
 import http from 'http'
 import express from 'express'
 import fs from 'fs'
+import App from '~/components/App.jsx'
 
-// react-router
-import React from 'react';
-import routes from '~/das_routes.js';
-import { match, RouterContext } from 'react-router';
-import { renderToString } from 'react-dom/server';
+const index = fs.readFileSync('build/index.html', 'utf8')
+const PORT = process.env.PORT || 8000
+
 
 // Create HTTP server
 const app = new express()
 const server = new http.Server(app)
 
-const index = fs.readFileSync('build/index.html', 'utf8')
-
-const PORT = process.env.PORT || 8000
-
 // Serve static files
 app.use(express.static('build'))
 
-// Proxy API calls to API server
-//const proxy = http_proxy.createProxyServer({ target: 'http://localhost:xxxx' })
-//app.use('/api', (req, res) => proxy.web(req, res))
-
-// React application rendering
+// Serve everything else through react-router
 app.use((req, res) => {
-	// Match current URL to the corresponding React page
-	match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-		if (error) {
-			res.status(500).send(error.message);
-		} else if (redirectLocation) {
-			res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-		} else if (renderProps) {
-			res.status(200)
-			var react_stuff = renderToString(<RouterContext {...renderProps} />);
-			var c =  index.replace(
-				/<div id="root"><\/div>/,
-				'<div id="root">' + react_stuff + '</div>'
-			);
-			console.log(c);
-			res.send(c);
-		} else {
-			res.status(404).send('not found');
-		}
-	})
+  const context = {}
+
+  const html = ReactDOMServer.renderToString(
+    <StaticRouter location={req.url} context={context}>
+      <App/>
+    </StaticRouter>
+  )
+
+  if (context.url) {
+    res.writeHead(301, {
+      Location: context.url
+    })
+    res.end()
+  } else {
+    res.write(index.replace(
+        /<div id="root"><\/div>/,
+		'<div id="root">' + html + '</div>'
+    ));
+    res.end()
+  }
 })
 
 // Start the HTTP server
