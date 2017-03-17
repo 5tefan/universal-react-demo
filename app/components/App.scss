@@ -9,15 +9,19 @@
             list-style: none;
             float: left;
             width: 120px;
-            border-top: 2px solid #000;
             margin-left: 15px;
+            // trade the px in the border for a px of padding
+            // between a and a:hover | .active
+            border-top: 2px solid #000;
             padding-top: 1px;
 
         }
 
         a:hover, .active {
-            padding-top: 0px;
+            // trade the px in the border for a px of padding
+            // between a and a:hover | .active
             border-top: 3px solid #555;
+            padding-top: 0px;
         }
     }
     main {

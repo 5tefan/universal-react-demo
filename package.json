@@ -1,7 +1,7 @@
 {
   "name": "universal-react-demo",
-  "version": "0.1.0",
-  "description": "A super slim demonstration of a universal React application.",
+  "version": "0.4.0",
+  "description": "A super slim demo of react, react-router, and server-side rendering.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

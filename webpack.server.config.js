@@ -29,9 +29,6 @@ module.exports = {
 		}, {
 			test: /\.scss$/,
 			loader: 'css-loader/locals?modules&loacalIdentName=[name]--[local]--[hash:base64:5]!sass-loader'
-		}, {
-            test: /\.json$/,
-            loader: 'json-loader' 
         }]
 	},
 	plugins: [
@@ -40,13 +37,6 @@ module.exports = {
             // for server side code, just require, don't chunk
             // use `if (ONSERVER) { ...` for server specific code
             ONSERVER: true
-        }),
-        new webpack.LoaderOptionsPlugin({
-            options: {
-                sassLoader: {
-                    includePaths: [path.resolve(__dirname, "./node_modules/compass-mixins/lib")]
-                }
-            }
         })
 	],
 }
