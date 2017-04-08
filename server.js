@@ -10,7 +10,6 @@ import App from '~/components/App.jsx'
 const index = fs.readFileSync('build/index.html', 'utf8')
 const PORT = process.env.PORT || 8000
 
-
 // Create HTTP server
 const app = new express()
 const server = new http.Server(app)
@@ -29,20 +28,17 @@ app.use((req, res) => {
   )
 
   if (context.url) {
-    res.writeHead(301, {
-      Location: context.url
-    })
+    res.writeHead(301, {Location: context.url})
     res.end()
   } else {
     res.write(index.replace(
         /<div id="root"><\/div>/,
-		'<div id="root">' + html + '</div>'
+		`<div id="root">${html}</div>`
     ));
     res.end()
   }
 })
 
-// Start the HTTP server
+// Listen incoming HTTP requests
 server.listen(PORT)
-console.log("\nApplication available at http://localhost:" + PORT + "\n")
-
+console.log(`\nApplication available at http://localhost:${PORT}\n`)

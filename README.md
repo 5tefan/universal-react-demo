@@ -16,10 +16,10 @@ with either feature bloat or to take things out before you even know what they d
 
 Features:
 
-- Latest [React](https://facebook.github.io/react/) (^15.1.0)
-- [Webpack](https://webpack.js.org/) 2.0 (code splitting and tree-shaking)
+- Latest [React](https://facebook.github.io/react/) (^15.5.3)
+- [Webpack](https://webpack.js.org/) 2.3 (code splitting and tree-shaking)
 - Written with [ES6](https://babeljs.io/learn-es2015/) (ECMAScript 2015)
-- Styling with SCSS
+- Styling with SCSS (or SASS)
 - Routing with [react-router](https://github.com/ReactTraining/react-router) V4
 - Based on the ["huge-apps" react-router example](https://github.com/ReactTraining/react-router/tree/b61db2aaaec46de453d3631abd67d6e42f8da9d1/examples/huge-apps) 
 - Server side rendering (aka. universal(ish) or isomorphic React)
@@ -44,7 +44,7 @@ Note: `webpack-dev-server` does not watch the webpack config file for changes.
 
 ### Build the client bundle
 
-Run `npm run client-build` to bundle all assets into a `build/` 
+Run `npm run build:client` to bundle all assets into a `build/`
 dir. This step must be done before server side rendering is possible.
 
 Since all our assets are in jsx, and es6, we have to transpile them to 
@@ -60,7 +60,7 @@ The file `server.js` implements server side rendering. It uses ES6+JSX syntax, s
 again, we need to convert it to regular Javascript for Node to execute.
 
 
-Run `npm run server-build` to do this. Webpack will bundle it into `./build/server.js`.
+Run `npm run build:server` to do this. Webpack will bundle it into `./build/server.js`.
 
 
 Now, you can run `node build/server.js` to view the server side rendered 
