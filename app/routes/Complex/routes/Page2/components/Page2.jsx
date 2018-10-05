@@ -8,4 +8,4 @@ class Page2 extends Component {
     }
 }
 
-module.exports = Page2;
+export default Page2;

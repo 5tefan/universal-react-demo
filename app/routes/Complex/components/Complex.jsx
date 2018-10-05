@@ -16,4 +16,5 @@ const Complex = ({ match }) => (
     </div>
 )
 
-module.exports = Complex;
+export default Complex;
+
