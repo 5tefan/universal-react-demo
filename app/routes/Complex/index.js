@@ -13,7 +13,7 @@ import Bundle from '~/components/Bundle.jsx';
 // for the import, https://webpack.github.io/docs/context.html
 let complex;
 if (ONSERVER) {
-    complex = require('./components/Complex.jsx');
+    complex = require('./components/Complex.jsx').default;
 } else {
     complex = (props) => (<Bundle load={ () => import('./components/Complex.jsx') } pass={ props }/>);
 }

@@ -13,7 +13,7 @@ import Bundle from '~/components/Bundle.jsx';
 // for the import, https://webpack.github.io/docs/context.html
 let page2;
 if (ONSERVER) {
-    page2 = require('./components/Page2.jsx');
+    page2 = require('./components/Page2.jsx').default;
 } else {
     page2 = () => (<Bundle load={ () => import('./components/Page2.jsx') }/>);
 }

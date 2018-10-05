@@ -14,7 +14,7 @@ import Bundle from '~/components/Bundle.jsx';
 
 let home;
 if (ONSERVER) {
-    home = require('./components/Home.jsx');
+    home = require('./components/Home.jsx').default;
 } else {
     home = () => (<Bundle load={ () => import('./components/Home.jsx') }/>);
 }

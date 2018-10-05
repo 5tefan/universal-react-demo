@@ -13,7 +13,7 @@ import Bundle from '~/components/Bundle.jsx';
 // for the import, https://webpack.github.io/docs/context.html
 let about;
 if (ONSERVER) {
-    about = require('./components/About.jsx');
+    about = require('./components/About.jsx').default;
 } else {
     about = () => (<Bundle load={ () => import('./components/About.jsx') }/>);
 }

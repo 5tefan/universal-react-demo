@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = ({ base }) => {
     const nodeEnv = process.env.NODE_ENV || 'development';
@@ -19,6 +20,7 @@ module.exports = ({ base }) => {
     return {
         devtool: isProd ? false : 'eval-source-map',
         mode: isProd ? 'production' : 'development',
+        externals: isClient ? [] : [nodeExternals()],
 
         entry: isClient
             ? { index: path.join(__dirname, './app/index.jsx'), vendor: ['react', 'react-dom'] }
