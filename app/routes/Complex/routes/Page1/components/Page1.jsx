@@ -8,5 +8,5 @@ class Page1 extends Component {
     }
 }
 
+export default Page1;
 
-module.exports = Page1;

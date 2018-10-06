@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 // Credit to the react-router docs for the inspiration for this
 // component [1]. It's been tailored slightly for use with 
-// System.import [2] (see Bundle usage in ~/routes). 
+// import [2] (see Bundle usage in ~/routes). 
 
 
 // [1] https://reacttraining.com/react-router/web/guides/code-splitting
@@ -37,7 +37,7 @@ class Bundle extends Component {
     // pass along any props from the router. This is important if you need to do subroutes...
     // you'll need ({ match }) to define subroutes as match.url + "/subroute1", etc...
     // see ~/routes/Complex
-    return ( this.state.mod ? <this.state.mod {...this.props.pass}/> : <p> loading... </p> );
+    return ( this.state.mod ? <this.state.mod.default {...this.props.pass}/> : <p> loading... </p> );
   }
 }
 

@@ -7,8 +7,10 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // Create html files from the bundle
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// Create the favicon
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = ({ base }) => {
     const nodeEnv = process.env.NODE_ENV || 'development';
@@ -17,6 +19,8 @@ module.exports = ({ base }) => {
 
     return {
         devtool: isProd ? false : 'eval-source-map',
+        mode: isProd ? 'production' : 'development',
+        externals: isClient ? [] : [nodeExternals()],
 
         entry: isClient
             ? { index: path.join(__dirname, './app/index.jsx'), vendor: ['react', 'react-dom'] }
@@ -26,6 +30,22 @@ module.exports = ({ base }) => {
             path: path.join(__dirname, './build'),
             filename: '[name].js',
             publicPath: '/'
+        },
+
+        optimization: {
+            splitChunks: {
+                chunks: 'all'
+//                name: 'vendor',
+//                minChunks: Infinity,
+//                filename: 'vendor.bundle.js'
+            },
+            removeEmptyChunks: true,
+            minimizer: [
+                new UglifyJsPlugin({
+                    parallel: true,
+                    sourceMap: !isProd
+                })
+            ]
         },
 
         resolve: {
@@ -38,15 +58,16 @@ module.exports = ({ base }) => {
         target: isClient ? 'web' : 'node',
 
         module: {
-            loaders: [{
+            rules: [{
                 test: /\.jsx?$/,
-                exclude: /node_modules/,
                 loader: 'babel-loader',
                 options: {
                     presets: [
-                        ['env', { 'targets': { 'browsers': ['last 2 versions']}}],
-                        'react',
-                        'stage-0'
+                        "@babel/preset-env",
+                        "@babel/preset-react",
+                    ],
+                    plugins: [
+                        "@babel/plugin-syntax-dynamic-import"
                     ]
                 }
             }, {
@@ -103,23 +124,11 @@ module.exports = ({ base }) => {
                 inject: 'body',
                 filename: 'index.html'
             }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor',
-                minChunks: Infinity,
-                filename: 'vendor.bundle.js'
-            }),
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false
-                },
-                output: {
-                    comments: false
-                },
-                sourceMap: false
-            }),
-            new ExtractTextPlugin({
-                filename: 'style.css',
-                allChunks: true
+            new MiniCssExtractPlugin({
+                // Options similar to the same options in webpackOptions.output
+                // both options are optional
+                filename: "[name].css",
+                chunkFilename: "[id].css"
             })
         ] : [
             new webpack.DefinePlugin({

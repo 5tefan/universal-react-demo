@@ -32,5 +32,5 @@ const App = () => (
     </div>
 )
 
-module.exports = App;
+export default App;
 

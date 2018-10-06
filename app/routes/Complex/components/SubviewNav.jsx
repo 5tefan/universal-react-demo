@@ -13,6 +13,5 @@ const SubviewNav = ({ match }) => (
     </div>
 )
 
-module.exports = SubviewNav;
-				
+export default SubviewNav;
 
