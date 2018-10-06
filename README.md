@@ -16,8 +16,8 @@ with either feature bloat or to take things out before you even know what they d
 
 Features:
 
-- Latest [React](https://facebook.github.io/react/) (^15.5.3)
-- [Webpack](https://webpack.js.org/) 2.3 (code splitting and tree-shaking)
+- Latest [React](https://facebook.github.io/react/) (^16.5.2)
+- [Webpack](https://webpack.js.org/) 4.20 (code splitting and tree-shaking)
 - Written with [ES6](https://babeljs.io/learn-es2015/) (ECMAScript 2015)
 - Styling with SCSS (or SASS)
 - Routing with [react-router](https://github.com/ReactTraining/react-router) V4
@@ -64,9 +64,12 @@ Run `npm run build:server` to do this. Webpack will bundle it into `./build/serv
 
 
 Now, you can run `node build/server.js` to view the server side rendered 
-version of your application on `http://localhost:8000`.
+version of your application at `http://localhost:8000`.
 
-A shortcut to build both the client and server, and then run the server: `npm run start`.
+A shortcut to build both the client and server, and then run the server is: `npm run start:prod`.
+
+To really see what server side rendering is up to, try loading the page with
+Javascript disabled. You'll still get the full experience. This is amazing!!
 
 ## Webpack
 
@@ -142,13 +145,13 @@ See [Webpack code splitting](https://webpack.github.io/docs/code-splitting.html)
 In this demo, see any route specification like [app/routes/About/index.js](app/routes/About/index.js)
 ```
 if (ONSERVER) {
-    module.exports = require('./components/About.jsx');
+    module.exports = require('./components/About.jsx').default;
 } else {
-    module.exports = () => (<Bundle load={ () => System.import('./components/About.jsx') }/>);
+    module.exports = () => (<Bundle load={ () => import('./components/About.jsx') }/>);
 }
 ```
 
-In this Demo, we use `System.import` for fetching react-router components. This results in
+In this Demo, we use `import` for fetching react-router components. This results in
 chunks for for our About page which are only fetched when the client visits `/about`. The 
 Bundle component is a convenience wrapper which displays a loading component while the 
 Promise returned by System.import is resoliving. Once resolved, Bundle changes it's state to
