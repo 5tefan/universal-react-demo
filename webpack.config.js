@@ -72,29 +72,16 @@ module.exports = ({ base }) => {
                 }
             }, {
                 test: /\.(scss|sass)$/,
-                use: isClient
-                    ? [
-                        { loader: 'style-loader' },
-                        {
-                            loader: 'css-loader',
-                            options:
-                            {
-                                modules: true
-                            }
-                        },
-                        { loader: 'sass-loader' }
-                    ]
-                    : [
-                        {
-                            loader: 'css-loader/locals',
-                            options:
-                            {
-                                modules: true,
-                                localIdentName: '[name]--[local]--[hash:base64:5]'
-                            }
-                        },
-                        { loader: 'sass-loader' }
-                    ]
+                use: [
+                    { loader: 'style-loader' },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true
+                        }
+                    },
+                    { loader: 'sass-loader' }
+                ]
             }]
         },
 
